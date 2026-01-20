@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // Ensure this matches your new .env PORT
+const API_URL = "https://task-tracker-pmuk.onrender.com/api/tasks";
+const HEALTH_URL = "https://task-tracker-pmuk.onrender.com/status";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -8,7 +10,7 @@ function App() {
 
   // Fetch tasks on page load
   useEffect(() => {
-    axios.get('http://localhost:10000/api/tasks')
+    axios.get(API_URL)
       .then(res => setTasks(res.data))
       .catch(err => console.error("Error fetching tasks:", err));
   }, []);
@@ -16,7 +18,7 @@ function App() {
   const addTask = async () => {
     if (!input) return;
     try {
-        const res = await axios.post('http://localhost:10000/api/tasks', { 
+        const res = await axios.post(API_URL, { 
             title: input 
         });
         setTasks([...tasks, res.data]); // Update the UI instantly
@@ -42,7 +44,7 @@ function App() {
         ))}
       </ul>
       <hr />
-      <p><a href="http://localhost:10000/status" target="_blank">View Server Health (Pug Page)</a></p>
+      <p><a href={HEALTH_URL} target="_blank">View Server Health (Pug Page)</a></p>
     </div>
   );
 }
