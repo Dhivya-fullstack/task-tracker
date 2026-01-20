@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// Ensure this matches your new .env PORT
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -7,7 +8,7 @@ function App() {
 
   // Fetch tasks on page load
   useEffect(() => {
-    axios.get('http://localhost:5002/api/tasks')
+    axios.get('http://localhost:10000/api/tasks')
       .then(res => setTasks(res.data))
       .catch(err => console.error("Error fetching tasks:", err));
   }, []);
@@ -15,14 +16,14 @@ function App() {
   const addTask = async () => {
     if (!input) return;
     try {
-        const res = await axios.post('http://localhost:5002/api/tasks', { 
+        const res = await axios.post('http://localhost:10000/api/tasks', { 
             title: input 
         });
         setTasks([...tasks, res.data]); // Update the UI instantly
         setInput(""); // Clear the input box
     } catch (err) {
         console.error("Network Error:", err);
-        alert("Could not save task. Check if the server is running on 5002!");
+        alert("Could not save task. Check if the server is running on 10000!");
     }
 };
   return (
@@ -41,7 +42,7 @@ function App() {
         ))}
       </ul>
       <hr />
-      <p><a href="http://localhost:5002/status" target="_blank">View Server Health (Pug Page)</a></p>
+      <p><a href="http://localhost:10000/status" target="_blank">View Server Health (Pug Page)</a></p>
     </div>
   );
 }
