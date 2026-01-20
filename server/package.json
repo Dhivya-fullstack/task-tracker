@@ -15,5 +15,9 @@
     "express": "^5.2.1",
     "mongoose": "^9.1.4",
     "pug": "^3.0.3"
-  }
+  },
+  "script": {
+  "start": "node index.js"
+}
+
 }
